@@ -10,6 +10,13 @@ include "subviews/header.php";
 			      <th scope="col">#</th>
 			      <th scope="col">Name</th>
 			      <th scope="col">Description</th>
+			      <?php
+                  if (isset($_SESSION['email'])) {
+                    ?>
+                    <th>Button</th>
+                    <?php
+                  }
+			      ?>
 			      <th scope="col">Likes</th>
 			    </tr>
 			  </thead>
