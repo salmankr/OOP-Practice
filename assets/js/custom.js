@@ -35,7 +35,7 @@ function postLikesFunction(postID){
 		url: '../controllers/postLikesController.php',
 		data: {postID : postID},
 		success: function(response){
-			console.log(response);
+			// console.log(response);
 			$('#postModalbody').html(response);
 			$('#postLikesModal').modal('show');
 		}
@@ -74,7 +74,7 @@ function getUpdatePost(postID){
 		data: {postID: postID},
 		success: function(response){
 			var res = JSON.parse(response)
-			console.log(res);
+			// console.log(res);
 			$('#updatePostName').val(res.name);
 			$('#updatePostDesc').val(res.desc);
 			$('#updatePostID').val(postID);
