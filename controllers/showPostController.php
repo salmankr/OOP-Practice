@@ -1,10 +1,6 @@
 <?php
 include "../helpers/init.php";
-class showPost{
-	public $connection;
-	public function __construct(){
-		$this->connection = new db_connection;
-	}
+class showPostController extends controller{
 	public function showPost(){
 		$query = "SELECT posts.name, posts.description, posts.id, post_likes.likes FROM posts INNER JOIN post_likes ON posts.id = post_likes.post_id";
 		$run = $this->connection->conn->query($query);
@@ -13,8 +9,15 @@ class showPost{
 			while ($row = $run->fetch_object()) {
 				$name = $row->name;
 				$description = $row->description;
-				$likes = $row->likes;
+				// $likes = $row->likes;
 				$postID = $row->id;
+				$likes = '<p onclick = "postLikesFunction('.$postID.')"><b><a href="#">'.$row->likes.'</a></b></p>';
+				$query3 = "SELECT signup.f_name, signup.l_name FROM signup INNER JOIN posts ON signup.id = posts.user_id WHERE posts.id = '$postID'";
+				$run3 = $this->connection->conn->query($query3);
+				while ($row3 = $run3->fetch_object()) {
+					$f_name = $row3->f_name;
+					$l_name = $row3->l_name;
+				}
 				if (isset($_SESSION['email'])) {
 				$userID = $_SESSION['userID'];
 				$query2 = "SELECT * FROM user_likes WHERE user_id = '$userID' AND post_id = '$postID'";
@@ -24,12 +27,12 @@ class showPost{
 						$likeStatus = $row2->like_status;
 					}
 					if ($likeStatus == false) {
-						$btn = '<button type="button" class="btn btn-primary" onclick="likeFunction('.$postID.', 1)">Like</button>';
+						$btn = '<button type="button" class="btn btn-primary" onclick="userLikeFunction('.$postID.', 1)">Like</button>';
 					}else{
-						$btn = '<button type="button" class="btn btn-success" onclick="likeFunction('.$postID.', 0)">Liked</button>';
+						$btn = '<button type="button" class="btn btn-success" onclick="userLikeFunction('.$postID.', 0)">Liked</button>';
 					}
 				}else{
-					$btn = '<button type="button" class="btn btn-primary" onclick="likeFunction('.$postID.', 1)">Like</button>';
+					$btn = '<button type="button" class="btn btn-primary" onclick="userLikeFunction('.$postID.', 1)">Like</button>';
 				}
 				// if (isset($_GET['likeStatus'])) {
 				// 	$userID = $_SESSION['userID'];
@@ -65,19 +68,18 @@ class showPost{
                 
 				
 				
-					$data = "<tr><td>".$key."</td><td>".$name."</td><td>".$description."</td><td>".$btn."</td><td>".$likes."</td></tr>";
+					$data = "<tr><td>".$key."</td><td>".$name."</td><td>".$description."</td><td>".$f_name." ".$l_name."</td><td>".$btn."</td><td>".$likes."</td></tr>";
 				}else{
-					$data = "<tr><td>".$key."</td><td>".$name."</td><td>".$description."</td><td>".$likes."</td></tr>";
+					$data = "<tr><td>".$key."</td><td>".$name."</td><td>".$description."</td><td>".$f_name." ".$l_name."</td><td>".$likes."</td></tr>";
 				}
 				$key++;
-				$response =  array($data, $likes);
-				print_r($response);
+				print_r($data);
 			}
 
 				
 		}
 	}
 }
-$execute = new showPost;
+$execute = new showPostController;
 $execute->showPost();
 ?>

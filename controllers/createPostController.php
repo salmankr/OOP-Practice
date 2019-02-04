@@ -1,12 +1,6 @@
 <?php
 include "../helpers/init.php";
-class createPost{
-    public $connection;
-	public $msg;
-	public function __construct(){
-		$this->connection = new db_connection;
-		$this->msg = new sessions;
-    }
+class createPostController extends controller{
     public function insertPost(){
     	if (isset($_POST['submit'])) {
     		$userID = $_SESSION['userID'];
@@ -23,9 +17,10 @@ class createPost{
     			}
     		}
     	}
+        unset($_SESSION['noPostMsg']);
     	header("location:" .base_uri. "createPost.php");
     }
 }
-$execute = new createPost;
+$execute = new createPostController;
 $execute->insertPost();
 ?>

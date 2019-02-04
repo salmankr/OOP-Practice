@@ -1,12 +1,6 @@
 <?php
 include "../helpers/init.php";
-class UserSignin{
-	public $connection;
-	public $session;
-	public function __construct(){
-		$this->connection = new db_connection;
-		$this->session = new sessions;
-	}
+class signinController extends controller{
 	public function signinQuery(){
 		if (isset($_POST['submit'])) {
 			$email = $_POST['email'];
@@ -29,6 +23,6 @@ class UserSignin{
 		}
 	}
 }
-$execute = new UserSignin;
+$execute = new signinController;
 $execute->signinQuery();
 ?>

@@ -1,15 +1,6 @@
 <?php
 include "../helpers/init.php";
-class UserSignup{
-	public $connection;
-	public $msg;
-   public $session;
-	public function __construct(){
-		$this->connection = new db_connection;
-		$this->msg = new sessions;
-      $this->session = new sessions;
-
-	}
+class signupController extends controller{
 	public function signupQuery(){
 		if (isset($_POST['submit'])) {
 			$first_name = $_POST['first_name'];
@@ -41,6 +32,6 @@ class UserSignup{
 		header("location: ../views/sign_up.php");
 	}
 }
-$execute = new UserSignup;
+$execute = new signupController;
 $execute->signupQuery();
 ?>

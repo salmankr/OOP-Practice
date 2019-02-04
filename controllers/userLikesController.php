@@ -1,11 +1,7 @@
 <?php
 include "../helpers/init.php";
-class likeController{
-	public $connection;
-	public function __construct(){
-		$this->connection = new db_connection;
-	}
-	public function like(){
+class userLikeController extends controller{
+	public function userLike(){
 		$postID = $_GET['postID'];
 		$likeStatus = $_GET['likeStatus'];
 		$userID = $_SESSION['userID'];
@@ -46,6 +42,6 @@ class likeController{
 		$run5 = $this->connection->conn->query($query5);
 	}
 }
-$execute = new likeController;
-$execute->like();
+$execute = new userLikeController;
+$execute->userLike();
 ?>
