@@ -75,9 +75,9 @@ class showPostController extends controller{
 				$key++;
 				print_r($data);
 			}
-
-				
-		}
+        }else{
+        	echo 0;
+        }
 	}
 }
 $execute = new showPostController;

@@ -71,7 +71,7 @@ if (!isset($_SESSION['email'])) {
 				    </div>
 				  </div>
 				</div>
-				<p style="text-align: center;" id="noPostMsg"></p>
+				<p style="text-align: center;" id="noUserPostMsg"></p>
 			    <?php
                 if (isset($_SESSION['delMsg'])) {
             		?>

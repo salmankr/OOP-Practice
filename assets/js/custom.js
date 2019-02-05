@@ -9,7 +9,11 @@ function getPosts(){
 	$.ajax({
 		url: '../controllers/showPostController.php',
 		success: function(response){
+			if (response == 0) {
+				$('#noPostMsg').html('Nothing to display right now!');
+			}else{
 		    $('.posts-tbl').append(response);
+		    }
 		}
 	})
 }
@@ -49,7 +53,7 @@ function getUserPosts(){
 		success: function(response){
 			// console.log(response);
 			if (response == 0) {
-				$('#noPostMsg').html('You did not post anything yet!');
+				$('#noUserPostMsg').html('You did not post anything yet!');
 		    }else{
 		    	$('.userPosts-tbl').html(response);
 

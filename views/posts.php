@@ -42,6 +42,7 @@ include "subviews/header.php";
 			    </div>
 			  </div>
 			</div>
+			<p style="text-align: center;" id="noPostMsg"></p>
 		</div>
 	</div>
 </div>
